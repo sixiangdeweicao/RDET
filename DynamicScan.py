@@ -10,7 +10,7 @@ from copy import deepcopy
 import argparse
 import math
 import time
-logging.basicConfig(filename='my_10000000_alpha=1.log', level=logging.INFO)
+
 """
 sudo python3 DynamicScan.py --input=/home/liguo/ipv6_project/6density/data1.csv --output=/home/liguo/ipv6_project/6density --budget=500  --IPv6=2001:da8:ff:212::10:3 --delta=16 --beta=16
 """
@@ -125,10 +125,10 @@ def Scan_Feedback(xi, budget,now_budget, R, T, all_Reward, args):
     TS_addr_union = list()
     SS_addr_union = list()
     sum_Reward = 0.0
-    for i in range(len(xi)):
+    for i in range(min(len(xi), args.num_node)):  # 防止越界
         sum_Reward += all_Reward[i]
         #sum_Reward += math.exp(all_Reward[i])
-    for i in range(len(xi)):
+    for i in range(min(len(xi), args.num_node)):
         # if i % 100 == 0:
         #     print(i)
         node = xi[i]
@@ -155,7 +155,7 @@ def Scan_Feedback(xi, budget,now_budget, R, T, all_Reward, args):
     print('[+]Hit rate:{}   Remaining scan times:{}\n'
        .format(float(len(R)/ (budget-now_budget)), now_budget))
 
-    for i in range(len(xi)):  # 更新节点的属性
+    for i in range(min(len(xi), args.num_node)):  # 更新节点的属性
         # if(i % 100 == 0):
         #     print(i)
         node = xi[i]
@@ -293,9 +293,9 @@ def Start():
     parse.add_argument('--IPv6',type=str, default="2001:da8:ff:212::7:8", help='local IPv6 address')
     parse.add_argument('--delta', type=int, default=16, help='the base of address')
     parse.add_argument('--beta',type=int, default=16, help='the max of node ')
-    parse.add_argument('--alpha',type=float, default=1,help='the parameter of RL ')
+    parse.add_argument('--alpha',type=float, default=0.1,help='the parameter of RL ')
     parse.add_argument('--batch_size', type=int, default=100000, help='the parameter for each epoch')
-    parse.add_argument('--num_node', type=int, default=100, help='the parameter for each epoch')
+    parse.add_argument('--num_node', type=int, default=500, help='the parameter for each epoch')
     args=parse.parse_args()
     # args.input = '/home/sgl/6density_no_APD/files/source_copy.hex'
     # args.output = '/home/sgl/6density_no_APD/files2'
@@ -305,6 +305,7 @@ def Start():
     # IPS=InputAddrs(input="data1.csv")
     # root=SpaceTreeGen(IPS,16,16)
     # OutputSpaceTree(root)
+    logging.basicConfig(filename='my_{},alpha={},num_node={},batch={}.log'.format(args.budget, args.alpha, args.num_node, args.batch_size), level=logging.INFO)
     print("ipv6 addres to sec begining")
     print(args.input)
     V = InputAddrs(input=args.input, beta=args.delta)
