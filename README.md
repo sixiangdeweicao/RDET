@@ -1,8 +1,8 @@
-# DET
-Efficient IPv6 address discovery algorithm DET which combines density, information entropy and space tree.  DET is short for detective, which means that  discovery new active IPv6 addresses  in the IPv6 address space.
+# RDET
+Efficient IPv6 address discovery algorithm RDET which combines density, information entropy and space tree.  RDET is short for detective, which means that  discovery new active IPv6 addresses  in the IPv6 address space.
 
 ## Dependencies and installation
-DET is compateible with Python3.x. You can install the requirements for your version. Besides, DET uses the following packages:
+RDET is compateible with Python3.x. You can install the requirements for your version. Besides, RDET uses the following packages:
  
 * argparse
 ```
@@ -50,15 +50,17 @@ Parameter meaning introduction：
 * IPv6:   type=str,local IPv6 address
 * delta:  type=int, default =16, the base of address
 * beta:   type=int, default=16,the max of node
-
+* alpha:  type=float, default=0.1,learning rate
+* num_node: type=int, default=100
+* batch_size: type=int, default=1000
 running example
 ```
-sudo python3 DynamicScan.py --input=DataDir/yourdata --output=StoreDir --budget=500  --IPv6=loacl Ipv6 address --delta=16 --beta=16
+sudo python3 DynamicScan.py
 ```
 # Data
 In order to support IPv6 network related research, we provide more data about hitlist(active IPv6 addresses) and address fingerprint information.
 
-If you want more data, you can send a request to sgl18@mails.tsinghua.edu.cn. 
+If you want more data, you can send a request to 18231535@bjtu.edu.cn 
 
 The request should include the work department, the purpose of data usage, and the data content obtained.
 
