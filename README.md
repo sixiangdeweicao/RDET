@@ -1,4 +1,4 @@
-# base model 主模型在model version Thompsom 中
+# base model 主模型在model version/Thompson 中
 Efficient IPv6 address discovery algorithm RDET which combines density, information entropy and space tree.  RDET is short for detective, which means that  discovery new active IPv6 addresses  in the IPv6 address space.
 
 ## Dependencies and installation
