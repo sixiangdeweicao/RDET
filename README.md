@@ -60,7 +60,7 @@ sudo python3 DynamicScan.py
 # Data
 In order to support IPv6 network related research, we provide more data about hitlist(active IPv6 addresses) and address fingerprint information.
 
-If you want more data, you can send a request to 18231535@bjtu.edu.cn 
+If you want more data, you can send a request to sgl18@mals.tsinghua.ed.cn
 
 The request should include the work department, the purpose of data usage, and the data content obtained.
 
